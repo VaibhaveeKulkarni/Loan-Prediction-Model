@@ -7,18 +7,26 @@ import numpy as np
 # Using st.cache_resource to cache these heavy objects, preventing them from reloading on every rerun
 @st.cache_resource
 def load_artifacts():
-    try:
-        with open('loan_model.pkl', 'rb') as file:
-            model = pickle.load(file)
-        with open('scaler.pkl', 'rb') as file:
-            scaler = pickle.load(file)
-        with open('feature_columns.pkl', 'rb') as file:
-            feature_columns = pickle.load(file)
-        return model, scaler, feature_columns
-    except FileNotFoundError:
-        st.error("Model artifacts not found. Please ensure 'loan_model.pkl', 'scaler.pkl', and 'feature_columns.pkl' are in the same directory as this app.py file.")
-        st.stop() # Stop the app if files are missing
+    import os
 
+    st.write("Current working directory:", os.getcwd())
+    st.write("Files found:", os.listdir())
+
+    try:
+        with open("loan_model.pkl", "rb") as f:
+            model = pickle.load(f)
+
+        with open("scaler.pkl", "rb") as f:
+            scaler = pickle.load(f)
+
+        with open("feature_columns.pkl", "rb") as f:
+            feature_columns = pickle.load(f)
+
+        return model, scaler, feature_columns
+
+    except Exception as e:
+        st.exception(e)
+        st.stop()
 model, scaler, feature_columns = load_artifacts()
 
 # --- Streamlit UI Configuration ---
