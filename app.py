@@ -57,7 +57,12 @@ with col1:
 with col2:
     applicant_income = st.number_input("Applicant Income (USD)", min_value=0, value=5000, step=100, help="Applicant's monthly income.")
     coapplicant_income = st.number_input("Coapplicant Income (USD)", min_value=0, value=0, step=100, help="Coapplicant's monthly income (if any).")
-    loan_amount = st.number_input("Loan Amount (USD in thousands)", min_value=1, value=120, step=10, help="Loan amount requested in thousands.") * 1000 # Convert to actual value
+    loan_amount = st.number_input(
+    "Loan Amount",
+    min_value=1,
+    value=120,
+    step=10
+)
     loan_amount_term = st.selectbox("Loan Amount Term (in months)", options=[12, 36, 60, 120, 180, 240, 300, 360, 480], index=7, help="Loan term in months.")
     credit_history = st.selectbox("Credit History", options=[1.0, 0.0], format_func=lambda x: "Yes (1.0)" if x==1.0 else "No (0.0)", help="Does the applicant have a credit history (1.0 for outstanding debts, 0.0 otherwise)?")
     property_area = st.selectbox("Property Area", options=['Urban', 'Rural', 'Semiurban'], help="Location of the property.")
