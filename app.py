@@ -7,11 +7,7 @@ import numpy as np
 # Using st.cache_resource to cache these heavy objects, preventing them from reloading on every rerun
 @st.cache_resource
 def load_artifacts():
-    import os
-
-    st.write("Current working directory:", os.getcwd())
-    st.write("Files found:", os.listdir())
-
+   
     try:
         with open("loan_model.pkl", "rb") as f:
             model = pickle.load(f)
